@@ -1,0 +1,34 @@
+{
+  "name": "pmbackend",
+  "version": "1.0.0",
+  "description": "Mean FSD Final Project - Project Manager backend",
+  "main": "server.js",
+  "scripts": {
+    "test-init": "jasmine init",
+    "test": "jasmine",
+    "dev": "babel-watch server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HIRIYURS/PMBackend.git"
+  },
+  "author": "Santhosh Shankar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HIRIYURS/PMBackend/issues"
+  },
+  "homepage": "https://github.com/HIRIYURS/PMBackend#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-watch": "^7.0.0",
+    "jasmine": "^3.3.1",
+    "request": "^2.88.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.19",
+    "winston": "^3.2.1"
+  }
+}
