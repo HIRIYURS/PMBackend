@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const winston = require('winston');
 
-const Task = require('./models/task');
+const projmgr = require('./models/projmgr');
 
 
 // Logging level
@@ -29,7 +29,7 @@ const logger = winston.createLogger({
       ]
   });
 
-const port = 8001;
+const port = 9001;
 const hostname = "localhost";
 
 const app = express();
@@ -42,7 +42,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/Tasks');
+mongoose.connect('mongodb://localhost:27017/ProjectManager');
 
 const connection = mongoose.connection;
 
@@ -51,104 +51,144 @@ connection.once('open', () => {
 });
 
 //Attach end points for the router
-router.route('/tasks').get((req, res) => {
+router.route('/').get((req, res) => {
     logger.info('Request Received!');
+    res.status(200).json("Yet to implement. Thank you!");
 
-    Task.find((err, tasks) => {
+});
+
+// route/API for User table
+router.route('/users').get((req, res) => {
+    logger.info('Request Received!');
+    
+    projmgr.User.find((err, users) => {
         if (err) {
+            logger.info('Unable to find any users');
             res.status(400).send(err);
         } else {
-            res.status(200).json(tasks);
+            logger.info('Got List of Users');
+            console.log(users);
+            res.status(200).json(users);
         }
-    });
+    });    
+    //res.status(200).json("Yet to implement. Thank you!");
+
 });
 
-router.route('/tasks/:id').get((req, res) => {
-    Task.findById(req.params.id, (err, task) => {
-        if (err) {
-            logger.info({ "message":"Error Getting the Task",
-                          "Task ID": req.params.id,
-                          "Error": err
-                        });
-            res.status(400).json({});
-        } else {
-            res.json(task);
-        }
-    });
+router.route('/users/:id').get((req, res) => {
+    res.status(200).json("Yet to implement. Thank you!");
 });
 
-router.route('/tasks/add').post((req, res) => {
+router.route('/user/add').post((req, res) => {
     logger.info({ "message":"Adding New Task: ",
                   "req.body": req.body
                 });    
-    let task = new Task(req.body);
-    task.save()
-        .then(task => {
-            res.status(200).json({'issue': 'Added Successfully'});
-            logger.info({ "message":"Adding Successfully"});
-        })
-        .catch(err => {
-            res.status(400).send('Failed to create new record');
-            logger.info({ "message":"Add Failed"});
-        });
+    res.status(200).json("Yet to implement. Thank you!");
 });
 
-router.route('/tasks/update/:id').post((req, res) => {
+router.route('/user/update/:id').post((req, res) => {
     logger.info({ "message":"Updating Task: ",
                   "req.params.id": req.params.id,
                   "req.body": req.body
                 });
-    Task.findById(req.params.id, (err, task) => {
-        if (!task)
-            return next(new Error('Could not load the document'));
-        else {
-            task.task = req.body.task;
-            task.start_date = req.body.start_date;
-            task.end_date = req.body.end_date;
-            task.priority = req.body.priority;
-            if (req.body.parent !== undefined) {
-                task.parent = req.body.parent;
-            }
-            task.save().then(task => {
-                res.status(200).json('Update Done');
-            }).catch(err => {
-                res.status(400).send('Update Failed!');
-            });
-        }
-    });
+    res.status(200).json("Yet to implement. Thank you!");
 });
 
-router.route('/tasks/delete/:id').get((req, res) => {
+router.route('/user/delete/:id').get((req, res) => {
     logger.info("Deleting Task: ", req.params.id);
-    Task.findByIdAndRemove({_id: req.params.id}, (err, task) => {
-        if (err) {
-            res.json('Error deleting issue');
-        } else {
-            res.json('Removed Successfully');
-        }
-    });
+    res.status(200).json("Yet to implement. Thank you!");
 });
 
-router.route('/tasks/endtask/:id').get((req, res) => {
-    logger.info("Ending Task: ", req.params.id);
-    Task.findById(req.params.id, (err, task) => {
-        if (!task)
-            return next(new Error('Could not load the document'));
-        else {
-            task.task = task.task;
-            task.start_date = task.start_date;
-            task.end_date = task.end_date;
-            task.priority = task.priority;
-            task.parent = task.parent;
-            task.finished = "true";
-            task.save().then(task => {
-                res.json('Ended the task');
-            }).catch(err => {
-                res.status(400).send('End Task Failed!');
-            });
-        }
-    });
+// router or API for Tasks
+router.route('/tasks').get((req, res) => {
+    logger.info('Request Received!');
+    res.status(200).json("Yet to implement. Thank you!");
+
 });
+
+router.route('/tasks/:id').get((req, res) => {
+    res.status(200).json("Yet to implement. Thank you!");
+});
+
+router.route('/gettasksbyproj/:id').get((req, res) => {
+    res.status(200).json("Yet to implement. Thank you!");
+});
+
+router.route('/task/add').post((req, res) => {
+    logger.info({ "message":"Adding New Task: ",
+                  "req.body": req.body
+                });    
+    res.status(200).json("Yet to implement. Thank you!");
+});
+
+router.route('/task/update/:id').post((req, res) => {
+    logger.info({ "message":"Updating Task: ",
+                  "req.params.id": req.params.id,
+                  "req.body": req.body
+                });
+    res.status(200).json("Yet to implement. Thank you!");
+});
+
+router.route('/task/delete/:id').get((req, res) => {
+    logger.info("Deleting Task: ", req.params.id);
+    res.status(200).json("Yet to implement. Thank you!");
+});
+
+router.route('/task/endtask/:id').get((req, res) => {
+    logger.info("Ending Task: ", req.params.id);
+    res.status(200).json("Yet to implement. Thank you!");
+});
+
+// route or API for Parent Task
+router.route('/parenttasks').get((req, res) => {
+    logger.info('Request Received!');
+    res.status(200).json("Yet to implement. Thank you!");
+
+});
+
+router.route('/parenttasks/:id').get((req, res) => {
+    res.status(200).json("Yet to implement get parenttask by id. Thank you!");
+});
+
+router.route('/parenttask/add').post((req, res) => {
+    logger.info('Request Received! /parenttask/add');
+    logger.info({ "message":"Adding New Task: ",
+                  "req.body": req.body
+                });    
+    res.status(200).json("Yet to implement add parenttask. Thank you!");
+});
+
+// route or API for Projects
+router.route('/project').get((req, res) => {
+    logger.info('Request Received!');
+    res.status(200).json("Yet to implement. Thank you!");
+
+});
+
+router.route('/project/:id').get((req, res) => {
+    res.status(200).json("Yet to implement. Thank you!");
+});
+
+router.route('/project/add').post((req, res) => {
+    logger.info({ "message":"Adding New Task: ",
+                  "req.body": req.body
+                });    
+    res.status(200).json("Yet to implement. Thank you!");
+});
+
+router.route('/project/update/:id').post((req, res) => {
+    logger.info({ "message":"Updating Task: ",
+                  "req.params.id": req.params.id,
+                  "req.body": req.body
+                });
+    res.status(200).json("Yet to implement. Thank you!");
+});
+
+router.route('/project/delete/:id').get((req, res) => {
+    logger.info("Deleting Task: ", req.params.id);
+    res.status(200).json("Yet to implement. Thank you!");
+});
+
 
 // Attach another middleware - router
 app.use('/', router);
