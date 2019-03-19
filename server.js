@@ -59,15 +59,13 @@ router.route('/').get((req, res) => {
 
 // route/API for User table
 router.route('/users').get((req, res) => {
-    logger.info('Request Received!');
+    //logger.info('Request Received to Get Users!');
     
     projmgr.User.find((err, users) => {
         if (err) {
-            logger.info('Unable to find any users');
+            logger.info('Error in Getting All Users');
             res.status(400).send(err);
         } else {
-            logger.info('Got List of Users');
-            console.log(users);
             res.status(200).json(users);
         }
     });    
@@ -76,27 +74,66 @@ router.route('/users').get((req, res) => {
 });
 
 router.route('/users/:id').get((req, res) => {
-    res.status(200).json("Yet to implement. Thank you!");
+    //logger.info('Request Received to Get User By ID!');
+    projmgr.User.findById(req.params.id, (err, user) => {
+        if (err) {
+            logger.info({ "message":"Error Getting the User",
+                          "Task ID": req.params.id,
+                          "Error": err
+                        });
+            res.status(400).json({});
+        } else {
+            res.json(user);
+        }
+    });
 });
 
 router.route('/user/add').post((req, res) => {
-    logger.info({ "message":"Adding New Task: ",
+    logger.info({ "message":"Adding New User: ",
                   "req.body": req.body
                 });    
-    res.status(200).json("Yet to implement. Thank you!");
+    let user = new projmgr.User(req.body);
+    user.save()
+        .then(user => {
+            res.status(200).json({'User': 'Added Successfully'});
+            logger.info({ "message":"Adding Successfully"});
+        })
+        .catch(err => {
+            res.status(400).send('Failed to create new User');
+            logger.info({ "message":"Add Failed"});
+        });
 });
 
 router.route('/user/update/:id').post((req, res) => {
-    logger.info({ "message":"Updating Task: ",
+    logger.info({ "message":"Updating User: ",
                   "req.params.id": req.params.id,
                   "req.body": req.body
                 });
-    res.status(200).json("Yet to implement. Thank you!");
+    projmgr.User.findById(req.params.id, (err, user) => {
+        if (!user)
+            return next(new Error('Could not load the User document'));
+        else {
+            user.first_name = req.body.first_name;
+            user.last_name = req.body.last_name;
+            user.employee_id = req.body.employee_id;
+            user.save().then(user => {
+                res.status(200).json('Update User Done');
+            }).catch(err => {
+                res.status(400).send('Update User Failed!');
+            });
+        }
+    });
 });
 
 router.route('/user/delete/:id').get((req, res) => {
     logger.info("Deleting Task: ", req.params.id);
-    res.status(200).json("Yet to implement. Thank you!");
+    projmgr.User.findByIdAndRemove({_id: req.params.id}, (err, user) => {
+        if (err) {
+            res.json('Error deleting User');
+        } else {
+            res.json('Removed User Successfully');
+        }
+    });
 });
 
 // router or API for Tasks

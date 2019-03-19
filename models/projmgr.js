@@ -8,7 +8,6 @@ let User = new Schema({
     first_name: {
         type: String,
         required: true,
-        unique: true,
         dropDups: true
     },
     last_name: {
