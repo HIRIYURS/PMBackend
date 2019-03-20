@@ -78,12 +78,29 @@ router.route('/users/:id').get((req, res) => {
     projmgr.User.findById(req.params.id, (err, user) => {
         if (err) {
             logger.info({ "message":"Error Getting the User",
-                          "Task ID": req.params.id,
+                          "User ID": req.params.id,
                           "Error": err
                         });
             res.status(400).json({});
         } else {
             res.json(user);
+        }
+    });
+});
+
+router.route('/getuserbyempid/:id').get((req, res) => {
+    logger.info({'Request':'Request Received to Get User By Employee ID', 
+                 'Employee ID': req.params.id
+                });
+    projmgr.User.findOne({"employee_id": req.params.id}, (err, user) => {
+        if (err) {
+            logger.info({ "message":"Error Getting the User by Employee ID",
+                          "User Employee ID": req.params.id,
+                          "Error": err
+                        });
+            res.status(400).json({});
+        } else {
+            res.status(200).json(user);
         }
     });
 });
@@ -126,12 +143,14 @@ router.route('/user/update/:id').post((req, res) => {
 });
 
 router.route('/user/delete/:id').get((req, res) => {
-    logger.info("Deleting User: ", req.params.id);
+    logger.info({'Request': "Deleting User: ", 
+                 'User ID': req.params.id
+                });
     projmgr.User.findByIdAndRemove({_id: req.params.id}, (err, user) => {
         if (err) {
-            res.json('Error deleting User');
+            res.status(400).json({'Error':'Error deleting User'});
         } else {
-            res.json('Removed User Successfully');
+            res.status(200).json({'User':'Removed User Successfully'});
         }
     });
 });
