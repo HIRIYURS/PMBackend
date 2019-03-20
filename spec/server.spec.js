@@ -1,14 +1,27 @@
 var Request = require("request");
+var origTimeOut;
 
 describe("Test Project Manager Backend APIs",() => {
     var server;
     beforeAll(() => {
         console.log("Opening The Server");
         server = require("../server");
+        origTimeOut = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+
     });
     afterAll(() => {
         console.log("Closing The Server");
         server.close();
+    });
+
+    beforeEach(() => {
+        origTimeOut = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+    });
+
+    afterEach(() => {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = origTimeOut;
     });
 
     describe("GET /users", () => {
@@ -31,7 +44,8 @@ describe("Test Project Manager Backend APIs",() => {
 
     describe("GET Existent User By ID", () => {
         var data = {};
-        var userID = "5c904861924c0c298918ee6c";
+        //var userID = "5c904861924c0c298918ee6c";
+        var userID = "5c92894c1c9d4400005e88a2";
         var APIurl = "http://localhost:9001/users/" + userID;
         beforeAll((done) => {
             Request.get(APIurl,

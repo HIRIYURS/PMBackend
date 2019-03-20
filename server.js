@@ -42,7 +42,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/ProjectManager');
+const uri = "mongodb+srv://ordermgr:ordermgr@cluster0-t4g7v.azure.mongodb.net/test?retryWrites=true";
+
+//mongoose.connect('mongodb://localhost:27017/ProjectManager');
+mongoose.connect(uri);
 
 const connection = mongoose.connection;
 
