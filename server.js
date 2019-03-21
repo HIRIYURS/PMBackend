@@ -53,6 +53,9 @@ connection.once('open', () => {
     logger.info("Connected to MongoDB Successfully!!");
 });
 
+var curDate = new Date();
+logger.info({"Server Starting!!! Current DateTime": curDate});
+
 //Attach end points for the router
 router.route('/').get((req, res) => {
     logger.info('Request Received!');

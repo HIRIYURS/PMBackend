@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">34.85% </span>
+        <span class="strong">43.5% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>69/198</span>
+        <span class='fraction'>87/200</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">13.89% </span>
+        <span class="strong">22.22% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>5/36</span>
+        <span class='fraction'>8/36</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">34.85% </span>
+        <span class="strong">43.5% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>69/198</span>
+        <span class='fraction'>87/200</span>
       </div>
     </div>
   </div>
@@ -463,7 +463,10 @@
 418
 419
 420
-421</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+421
+422
+423
+424</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -517,6 +520,9 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
@@ -799,43 +805,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -937,6 +943,9 @@ const connection = mongoose.connection;
 connection.once('open', () =&gt; {
     logger.info("Connected to MongoDB Successfully!!");
 });
+&nbsp;
+var curDate = new Date();
+logger.info({"Server Starting!!! Current DateTime": curDate});
 &nbsp;
 //Attach end points for the router
 router.route('/').get((req, res) =&gt; {
@@ -1219,43 +1228,43 @@ router.route('/parenttask/delete/:id').get((req, res) =&gt; {
 &nbsp;
 // route or API for Projects
 router.route('/projects').get((req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    logger.info('Request Received to add Project!');</span>
-<span class="cstat-no" title="statement not covered" >    projmgr.Project.find((err, projects) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+    logger.info('Request Received to add Project!');
+    projmgr.Project.find((err, projects) =&gt; {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >            res.status(400).send(err);</span>
         } else {
-<span class="cstat-no" title="statement not covered" >            res.status(200).json(projects);</span>
+            res.status(200).json(projects);
         }
     });
 });
 &nbsp;
 router.route('/projects/:id').get((req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    projmgr.Project.findById(req.params.id, (err, project) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        if (err) {</span>
-<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Error Getting the project",</span>
+    projmgr.Project.findById(req.params.id, (err, project) =&gt; {
+        if (err) {
+            logger.info({ "message":"Error Getting the project",
                           "project ID": req.params.id,
                           "Error": err
                         });
-<span class="cstat-no" title="statement not covered" >            res.status(400).json({});</span>
+            res.status(400).json({});
         } else {
-<span class="cstat-no" title="statement not covered" >            res.json(project);</span>
+            res.json(project);
         }
     });
 });
 &nbsp;
 router.route('/project/add').post((req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    logger.info({ "message":"Adding New Project: ",</span>
+    logger.info({ "message":"Adding New Project: ",
                   "req.body": req.body
                 });    
-<span class="cstat-no" title="statement not covered" >    let project = new projmgr.Project(req.body);</span>
-<span class="cstat-no" title="statement not covered" >    project.save()</span>
+    let project = new projmgr.Project(req.body);
+    project.save()
         .then(project =&gt; {
-<span class="cstat-no" title="statement not covered" >            res.status(200).json({'Project': 'Added Successfully'});</span>
-<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Project Added Successfully"});</span>
+            res.status(200).json({'Project': 'Added Successfully'});
+            logger.info({ "message":"Project Added Successfully"});
         })
         .catch(err =&gt; {
-<span class="cstat-no" title="statement not covered" >            res.status(400).send('Failed to create new Project');</span>
-<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"project Add Failed"});</span>
+            res.status(400).send('Failed to create new Project');
+            logger.info({ "message":"project Add Failed"});
         });
 });
 &nbsp;
@@ -1309,7 +1318,7 @@ module.exports = server;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 22 2019 02:15:17 GMT+0530 (India Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 22 2019 03:17:13 GMT+0530 (India Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>
