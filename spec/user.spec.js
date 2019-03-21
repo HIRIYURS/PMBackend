@@ -1,7 +1,6 @@
 var Request = require("request");
 var origTimeOut;
 var userIDToDel;
-var userEmpIDToDel;
 
 describe("Test Project Manager Backend APIs",() => {
     var server;
@@ -28,6 +27,7 @@ describe("Test Project Manager Backend APIs",() => {
 
     describe("Get All users", () => {
         var data = {};
+        var userIDToDel;
         beforeAll((done) => {
             Request.get("http://localhost:9001/users", (err, response, body) => {
                 data.status = response.statusCode;
