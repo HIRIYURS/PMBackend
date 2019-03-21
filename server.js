@@ -51,7 +51,6 @@ const connection = mongoose.connection;
 
 connection.once('open', () => {
     logger.info("Connected to MongoDB Successfully!!");
-    console.log("Connected to MongoDB Successfully!!");
 });
 
 //Attach end points for the router
