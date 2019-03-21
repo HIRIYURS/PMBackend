@@ -6,7 +6,8 @@
   "scripts": {
     "test-init": "jasmine init",
     "test": "jasmine",
-    "dev": "babel-watch server.js"
+    "dev": "babel-watch server.js",
+    "test-cover": "istanbul cover ./node_modules/jasmine/bin/jasmine.js"
   },
   "repository": {
     "type": "git",

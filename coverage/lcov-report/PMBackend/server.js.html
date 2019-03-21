@@ -1,0 +1,1325 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for PMBackend\server.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">PMBackend/</a> server.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">31.82% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>63/198</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>4/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">31.82% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>63/198</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">// MEAN FSD FINAL Project - PROJECT MANAGER BACKEND
+// import express from 'express';
+// import cors from 'cors';
+// import bodyParser from 'body-parser';
+// import mongoose from 'mongoose';
+// import winston from 'winston';
+&nbsp;
+// import Task from './models/task';
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const winston = require('winston');
+&nbsp;
+const projmgr = require('./models/projmgr');
+&nbsp;
+&nbsp;
+// Logging level
+//winston.level = process.env.LOG_LEVEL
+&nbsp;
+const logger = winston.createLogger({
+    level: process.env.LOG_LEVEL,
+    format: winston.format.json(),
+    // You can also comment out the line above and uncomment the line below for JSON format
+    // format: format.json(),
+    transports: [
+        //new winston.transports.Console(),
+        new winston.transports.File({ filename: './logs/logfile.log' })
+      ]
+  });
+&nbsp;
+const port = 9001;
+const hostname = "localhost";
+&nbsp;
+const app = express();
+const router = express.Router();
+&nbsp;
+//Setup to use cors - attach middleware cors
+app.use(cors());
+&nbsp;
+//Setup to parse jason data in requests
+app.use(bodyParser.json());
+&nbsp;
+//Connect to MongoDB
+const uri = "mongodb+srv://ordermgr:ordermgr@cluster0-t4g7v.azure.mongodb.net/test?retryWrites=true";
+&nbsp;
+//mongoose.connect('mongodb://localhost:27017/ProjectManager');
+mongoose.connect(uri);
+&nbsp;
+const connection = mongoose.connection;
+&nbsp;
+connection.once('open', () =&gt; {
+    logger.info("Connected to MongoDB Successfully!!");
+});
+&nbsp;
+//Attach end points for the router
+router.route('/').get((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info('Request Received!');</span>
+<span class="cstat-no" title="statement not covered" >    res.status(200).json("Yet to implement. Thank you!");</span>
+&nbsp;
+});
+&nbsp;
+// route/API for User table
+router.route('/users').get((req, res) =&gt; {
+    logger.info('Request Received to Get Users!');
+    
+    projmgr.User.find((err, users) =&gt; {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
+<span class="cstat-no" title="statement not covered" >            logger.info('Error in Getting All Users');</span>
+<span class="cstat-no" title="statement not covered" >            res.status(400).send(err);</span>
+        } else {
+            res.status(200).json(users);
+        }
+    });    
+    //res.status(200).json("Yet to implement. Thank you!");
+&nbsp;
+});
+&nbsp;
+router.route('/users/:id').get((req, res) =&gt; {
+    //logger.info('Request Received to Get User By ID!');
+    projmgr.User.findById(req.params.id, (err, user) =&gt; {
+        if (err) {
+            logger.info({ "message":"Error Getting the User",
+                          "User ID": req.params.id,
+                          "Error": err
+                        });
+            res.status(400).json({});
+        } else {
+            res.json(user);
+        }
+    });
+});
+&nbsp;
+router.route('/getuserbyempid/:id').get((req, res) =&gt; {
+    logger.info({'Request':'Request Received to Get User By Employee ID', 
+                 'Employee ID': req.params.id
+                });
+    projmgr.User.findOne({"employee_id": req.params.id}, (err, user) =&gt; {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Error Getting the User by Employee ID",</span>
+                          "User Employee ID": req.params.id,
+                          "Error": err
+                        });
+<span class="cstat-no" title="statement not covered" >            res.status(400).json({});</span>
+        } else {
+            res.status(200).json(user);
+        }
+    });
+});
+&nbsp;
+router.route('/user/add').post((req, res) =&gt; {
+    logger.info({ "message":"Adding New User: ",
+                  "req.body": req.body
+                });    
+    let user = new projmgr.User(req.body);
+    user.save()
+        .then(user =&gt; {
+            res.status(200).json({'User': 'Added Successfully'});
+            logger.info({ "message":"Adding Successfully"});
+        })
+        .catch(err =&gt; {
+<span class="cstat-no" title="statement not covered" >            res.status(400).send('Failed to create new User');</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Add Failed"});</span>
+        });
+});
+&nbsp;
+router.route('/user/update/:id').post((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info({ "message":"Updating User: ",</span>
+                  "req.params.id": req.params.id,
+                  "req.body": req.body
+                });
+<span class="cstat-no" title="statement not covered" >    projmgr.User.findById(req.params.id, (err, user) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (!user)</span>
+<span class="cstat-no" title="statement not covered" >            return next(new Error('Could not load the User document'));</span>
+        else {
+<span class="cstat-no" title="statement not covered" >            user.first_name = req.body.first_name;</span>
+<span class="cstat-no" title="statement not covered" >            user.last_name = req.body.last_name;</span>
+<span class="cstat-no" title="statement not covered" >            user.employee_id = req.body.employee_id;</span>
+<span class="cstat-no" title="statement not covered" >            user.save().then(user =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                res.status(200).json('Update User Done');</span>
+            }).catch(err =&gt; {
+<span class="cstat-no" title="statement not covered" >                res.status(400).send('Update User Failed!');</span>
+            });
+        }
+    });
+});
+&nbsp;
+router.route('/user/delete/:id').get((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info({'Request': "Deleting User: ", </span>
+                 'User ID': req.params.id
+                });
+<span class="cstat-no" title="statement not covered" >    projmgr.User.findByIdAndRemove({_id: req.params.id}, (err, user) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            res.status(400).json({'Error':'Error deleting User'});</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.status(200).json({'User':'Removed User Successfully'});</span>
+        }
+    });
+});
+&nbsp;
+// router or API for Tasks
+router.route('/tasks').get((req, res) =&gt; {
+    //logger.info('Request Received to Get Tasks!');
+    
+<span class="cstat-no" title="statement not covered" >    projmgr.Task.find((err, task) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            logger.info('Error in Getting All Tasks');</span>
+<span class="cstat-no" title="statement not covered" >            res.status(400).send(err);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.status(200).json(task);</span>
+        }
+    });    
+&nbsp;
+});
+&nbsp;
+router.route('/tasks/:id').get((req, res) =&gt; {
+    //logger.info('Request Received to Get User By ID!');
+<span class="cstat-no" title="statement not covered" >    projmgr.Task.findById(req.params.id, (err, task) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Error Getting the User",</span>
+                          "Task ID": req.params.id,
+                          "Error": err
+                        });
+<span class="cstat-no" title="statement not covered" >            res.status(400).json({});</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.json(task);</span>
+        }
+    });
+});
+&nbsp;
+router.route('/gettasksbyproj/:id').get((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info('Request Received to Get Tasks By Project!');</span>
+<span class="cstat-no" title="statement not covered" >    projmgr.User.find({ "parent": req.params.id}, (err, tasks) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Error Getting the Tasks for Project",</span>
+                          "Project ID": req.params.id,
+                          "Error": err
+                        });
+<span class="cstat-no" title="statement not covered" >            res.status(400).json({});</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.json(tasks);</span>
+        }
+    });
+});
+&nbsp;
+router.route('/task/add').post((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info({ "message":"Adding New Task: ",</span>
+                  "req.body": req.body
+                });    
+<span class="cstat-no" title="statement not covered" >    let task = new projmgr.Task(req.body);</span>
+<span class="cstat-no" title="statement not covered" >    task.save()</span>
+        .then(task =&gt; {
+<span class="cstat-no" title="statement not covered" >            res.status(200).json({'Task': 'Added Successfully'});</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Adding Successfully"});</span>
+        })
+        .catch(err =&gt; {
+<span class="cstat-no" title="statement not covered" >            res.status(400).send('Failed to create new User');</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Add Failed"});</span>
+        });
+});
+&nbsp;
+router.route('/task/update/:id').post((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info({ "message":"Updating Task: ",</span>
+                  "req.params.id": req.params.id,
+                  "req.body": req.body
+                });
+<span class="cstat-no" title="statement not covered" >    projmgr.Task.findById(req.params.id, (err, task) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (!task)</span>
+<span class="cstat-no" title="statement not covered" >            return next(new Error('Could not load the User document'));</span>
+        else {
+<span class="cstat-no" title="statement not covered" >            task.task = req.body.task;</span>
+<span class="cstat-no" title="statement not covered" >            task.start_date = req.body.start_date;</span>
+<span class="cstat-no" title="statement not covered" >            task.end_date = req.body.end_date;</span>
+<span class="cstat-no" title="statement not covered" >            task.priority = req.body.priority;</span>
+<span class="cstat-no" title="statement not covered" >            task.status = req.body.status;</span>
+<span class="cstat-no" title="statement not covered" >            task.parent = req.body.parent;</span>
+<span class="cstat-no" title="statement not covered" >            task.user = req.body.user;</span>
+<span class="cstat-no" title="statement not covered" >            task.project = req.body.project;</span>
+<span class="cstat-no" title="statement not covered" >            task.save().then(task =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                res.status(200).json('Update Task Done');</span>
+            }).catch(err =&gt; {
+<span class="cstat-no" title="statement not covered" >                res.status(400).send('Update Task Failed!');</span>
+            });
+        }
+    });
+});
+&nbsp;
+router.route('/task/delete/:id').get((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info("Deleting Task: ", req.params.id);</span>
+<span class="cstat-no" title="statement not covered" >    projmgr.Task.findByIdAndRemove({_id: req.params.id}, (err, task) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            res.json('Error deleting Task');</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.json('Removed Task Successfully');</span>
+        }
+    });
+});
+&nbsp;
+router.route('/task/endtask/:id').get((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info("Ending Task: ", req.params.id);</span>
+<span class="cstat-no" title="statement not covered" >    projmgr.Task.findById(req.params.id, (err, task) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (!task)</span>
+<span class="cstat-no" title="statement not covered" >            return next(new Error('Could not load the document'));</span>
+        else {
+<span class="cstat-no" title="statement not covered" >            task.task = task.task;</span>
+<span class="cstat-no" title="statement not covered" >            task.start_date = task.start_date;</span>
+<span class="cstat-no" title="statement not covered" >            task.end_date = task.end_date;</span>
+<span class="cstat-no" title="statement not covered" >            task.priority = task.priority;</span>
+<span class="cstat-no" title="statement not covered" >            task.parent = task.parent;</span>
+<span class="cstat-no" title="statement not covered" >            task.status = "true";</span>
+<span class="cstat-no" title="statement not covered" >            task.save().then(task =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                res.json('Ended the task');</span>
+            }).catch(err =&gt; {
+<span class="cstat-no" title="statement not covered" >                res.status(400).send('End Task Failed!');</span>
+            });
+        }
+    });
+});
+&nbsp;
+// route or API for Parent Task
+router.route('/parenttasks').get((req, res) =&gt; {
+    //logger.info('Request Received for getting all Parent Tasks!');
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    projmgr.Parent.find((err, ptasks) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            res.status(400).send(err);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.status(200).json(ptasks);</span>
+        }
+    });
+});
+&nbsp;
+router.route('/parenttasks/:id').get((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    projmgr.Parent.findById(req.params.id, (err, ptask) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Error Getting the Parent Task",</span>
+                          "Parent ID": req.params.id,
+                          "Error": err
+                        });
+<span class="cstat-no" title="statement not covered" >            res.status(400).json({});</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.json(ptask);</span>
+        }
+    });
+});
+&nbsp;
+router.route('/parenttask/add').post((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info('Request Received to add Parent Task!');</span>
+<span class="cstat-no" title="statement not covered" >    logger.info({ "message":"Adding New Parent Task: ",</span>
+                  "req.body": req.body
+                });    
+<span class="cstat-no" title="statement not covered" >    let ptask = new projmgr.Parent(req.body);</span>
+<span class="cstat-no" title="statement not covered" >    ptask.save()</span>
+        .then(ptask =&gt; {
+<span class="cstat-no" title="statement not covered" >            res.status(200).json({'Parent': 'Added Successfully'});</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Adding Successfully"});</span>
+        })
+        .catch(err =&gt; {
+<span class="cstat-no" title="statement not covered" >            res.status(400).send('Failed to create new Parent Task');</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Add Failed"});</span>
+        });
+});
+&nbsp;
+router.route('/parenttask/delete/:id').get((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info("Deleting Parent Task: ", req.params.id);</span>
+<span class="cstat-no" title="statement not covered" >    projmgr.Parent.findByIdAndRemove({_id: req.params.id}, (err, ptask) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            res.json('Error deleting Parent Task');</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.json('Parent Task Removed Successfully');</span>
+        }
+    });
+});
+&nbsp;
+// route or API for Projects
+router.route('/projects').get((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info('Request Received to add Project!');</span>
+<span class="cstat-no" title="statement not covered" >    projmgr.Project.find((err, projects) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            res.status(400).send(err);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.status(200).json(projects);</span>
+        }
+    });
+});
+&nbsp;
+router.route('/projects/:id').get((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    projmgr.Project.findById(req.params.id, (err, project) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Error Getting the project",</span>
+                          "project ID": req.params.id,
+                          "Error": err
+                        });
+<span class="cstat-no" title="statement not covered" >            res.status(400).json({});</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.json(project);</span>
+        }
+    });
+});
+&nbsp;
+router.route('/project/add').post((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info({ "message":"Adding New Project: ",</span>
+                  "req.body": req.body
+                });    
+<span class="cstat-no" title="statement not covered" >    let project = new projmgr.Project(req.body);</span>
+<span class="cstat-no" title="statement not covered" >    project.save()</span>
+        .then(project =&gt; {
+<span class="cstat-no" title="statement not covered" >            res.status(200).json({'Project': 'Added Successfully'});</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Project Added Successfully"});</span>
+        })
+        .catch(err =&gt; {
+<span class="cstat-no" title="statement not covered" >            res.status(400).send('Failed to create new Project');</span>
+<span class="cstat-no" title="statement not covered" >            logger.info({ "message":"project Add Failed"});</span>
+        });
+});
+&nbsp;
+router.route('/project/update/:id').post((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info({ "message":"Updating Project: ",</span>
+                  "req.params.id": req.params.id,
+                  "req.body": req.body
+                });
+<span class="cstat-no" title="statement not covered" >    projmgr.Project.findById(req.params.id, (err, project) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (!project)</span>
+<span class="cstat-no" title="statement not covered" >            return next(new Error('Could not load the Project document'));</span>
+        else {
+<span class="cstat-no" title="statement not covered" >            project.project_name = req.body.project_name;</span>
+<span class="cstat-no" title="statement not covered" >            project.start_date = req.body.start_date;</span>
+<span class="cstat-no" title="statement not covered" >            project.end_date = req.body.end_date;</span>
+<span class="cstat-no" title="statement not covered" >            project.priority = req.body.priority;</span>
+<span class="cstat-no" title="statement not covered" >            project.user = req.body.user;</span>
+<span class="cstat-no" title="statement not covered" >            project.save().then(project =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                res.status(200).json('Project Update Done');</span>
+            }).catch(err =&gt; {
+<span class="cstat-no" title="statement not covered" >                res.status(400).send('Project Update Failed!');</span>
+            });
+        }
+    });
+});
+&nbsp;
+router.route('/project/delete/:id').get((req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.info("Deleting Project: ", req.params.id);</span>
+<span class="cstat-no" title="statement not covered" >    projmgr.Project.findByIdAndRemove({_id: req.params.id}, (err, project) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            res.json('Error deleting Project');</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.json('Project Removed Successfully');</span>
+        }
+    });
+});
+&nbsp;
+&nbsp;
+// Attach another middleware - router
+app.use('/', router);
+&nbsp;
+//app.get('/', (req, res) =&gt; res.send("My First Ever Node/Express Server: Hello World, I have Arrived!!"));
+&nbsp;
+var server = app.listen(port, hostname, () =&gt; {
+    logger.info(`My First ever Express Server running on Port ${hostname}:${port}`);
+});
+&nbsp;
+module.exports = server;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 21 2019 07:07:28 GMT+0530 (India Standard Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
