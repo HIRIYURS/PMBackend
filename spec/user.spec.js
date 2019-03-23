@@ -548,6 +548,9 @@ describe("Test Project Manager Backend APIs",() => {
         });
     });    
 
+    ////////////////////////////////
+    // Delete APIs                //
+    ////////////////////////////////
     describe("Delete an Existing Task", () => {
         var data = {};
         var taskToDel;
@@ -586,17 +589,18 @@ describe("Test Project Manager Backend APIs",() => {
     // describe("Delete an Existing User", () => {
     //     var data = {};
     //     var userToDel;
-    //     var counter = 1;
+    //     var ucounter = 1;
     //     beforeEach((done) => {
-    //         if (counter == 1) {
+    //         if (ucounter == 1) {
+    //             console.log("Getting ALL USERS");
     //             Request.get("http://localhost:9001/users", (err, response, body) => {
     //                 data.status = response.statusCode;
     //                 data.body = JSON.parse(body);
-    //                 counter++;
+    //                 ucounter++;
     //                 done();
     //             });
     //         } 
-    //         if (counter == 2) {
+    //         if (ucounter == 2) {
     //             console.log("User to Delete: ", userToDel);
     //             var APIurl = "http://localhost:9001/user/delete/" + userToDel;
     //             Request.get(APIurl, (err, response, body) => {
@@ -636,8 +640,7 @@ describe("Test Project Manager Backend APIs",() => {
                 });
             } 
             if (counter == 2) {
-                console.log("Project to Delete: ", projToDel);
-                var APIurl = "http://localhost:9001/user/delete/" + projToDel;
+                var APIurl = "http://localhost:9001/project/delete/" + projToDel;
                 Request.get(APIurl, (err, response, body) => {
                     data.status = response.statusCode;
                     data.body = JSON.parse(body);
@@ -648,7 +651,6 @@ describe("Test Project Manager Backend APIs",() => {
 
         it("Response Status", (done) => {
             expect(data.status).toBe(200);
-            console.log("data.status: ", data.status);
             if (data.status == 200) {
                 projToDel = data.body[3]._id;
             }
@@ -658,6 +660,47 @@ describe("Test Project Manager Backend APIs",() => {
         it("Delete Response Status", (done) => {
             expect(data.status).toBe(200);
             done();            
+        });
+    });    
+
+    ////////////////////////////////
+    // Update APIs                //
+    ////////////////////////////////
+    describe("Update an Existing Task", () => {
+        var data = {};
+        var taskID = "5c959fc61c9d440000845fca";
+        var APIurl = "http://localhost:9001/task/update/" + taskID;
+        var task = "My First Task";
+        var start_date = new Date();
+        var end_date = new Date();
+        end_date.setDate(end_date.getDate() + 1);
+        var priority = 17;
+        var user = mongoose.Types.ObjectId("5c92894c1c9d4400005e88a2");
+        var project = mongoose.Types.ObjectId("5c9401a01c9d4400001350a2");
+        var parent = mongoose.Types.ObjectId("5c959cf91c9d440000845fc8");
+
+        console.log("\n********** APIurl: ", APIurl);
+        beforeAll((done) => {
+            Request.post(APIurl, 
+                         {
+                            json: {
+                                "task": task,
+                                "start_date": start_date,
+                                "end_date": end_date,
+                                "priority": priority,
+                                "user": user,
+                                "project": project,
+                                "parent": parent
+                            }
+                         },
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(JSON.stringify(body));
+                done();
+            });
+        });
+        it("Update existing Task", () => {
+            expect(data.status).toBe(200);
         });
     });    
 
