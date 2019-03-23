@@ -1,4 +1,5 @@
 var Request = require("request");
+var mongoose = require('mongoose');
 var origTimeOut;
 var userIDToDel;
 
@@ -8,7 +9,7 @@ describe("Test Project Manager Backend APIs",() => {
         console.log("Opening The Server");
         server = require("../server");
         origTimeOut = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
     });
     afterAll(() => {
@@ -27,7 +28,6 @@ describe("Test Project Manager Backend APIs",() => {
 
     describe("Get All users", () => {
         var data = {};
-        var userIDToDel;
         beforeAll((done) => {
             Request.get("http://localhost:9001/users", (err, response, body) => {
                 data.status = response.statusCode;
@@ -40,11 +40,6 @@ describe("Test Project Manager Backend APIs",() => {
             expect(data.status).toBe(200);
         });
         it("Response Message", () => {
-            // Save ID to be used for delete user test case
-            userIDToDel = data.body[0]._id;
-            userEmpIDToDel = data.body[0].employee_id;
-            console.log("User ID: ", userIDToDel);
-            console.log("Employee ID: ", userEmpIDToDel);
             expect(data.body.length).toBeGreaterThan(0);
         });
     });
@@ -310,6 +305,117 @@ describe("Test Project Manager Backend APIs",() => {
         });
 
         it("Add Project Request Status", () => {
+            expect(data.status).toBe(400);
+        });
+    });
+
+    ///////////////////////////
+    // Tasks APIs            //
+    ///////////////////////////
+    describe("Get All Task", () => {
+        var data = {};
+        beforeAll((done) => {
+            Request.get("http://localhost:9001/tasks", (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(body);
+                done();
+            });
+        });
+
+        it("Response Status", () => {
+            expect(data.status).toBe(200);
+        });
+        it("Response Message", () => {
+            expect(data.body.length).toBeGreaterThan(0);
+        });
+    });
+
+    describe("Get Existent Task By ID", () => {
+        var data = {};
+        var taskID = "5c959fc61c9d440000845fca";
+        var APIurl = "http://localhost:9001/tasks/" + taskID;
+        beforeAll((done) => {
+            Request.get(APIurl,
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(body);
+                done();
+            });
+        });
+
+        it("Found Tasks", () => {
+            expect(data.status).toBe(200);
+        });
+        it("Response Body", () => {
+            expect(data.body._id).toEqual(taskID);
+        });
+    });
+
+    describe("Add a New Task", () => {
+        var data = {};
+        var task_id = Math.floor(Math.random()* (9000-1000)+1000);
+        var task = "Unit Test Task Name" + task_id;
+        var start_date = new Date();
+        var end_date = new Date();
+        end_date.setDate(end_date.getDate() + 1);
+        var priority = 10;
+        var user = mongoose.Types.ObjectId("5c92894c1c9d4400005e88a2");
+        var project = mongoose.Types.ObjectId("5c9401a01c9d4400001350a2");
+        var parent = mongoose.Types.ObjectId("5c959cf91c9d440000845fc8");
+        beforeAll((done) => {
+            Request.post("http://localhost:9001/task/add", 
+                         {
+                            json: {
+                                "task": task,
+                                "start_date": start_date,
+                                "end_date": end_date,
+                                "priority": priority,
+                                "user": user,
+                                "project": project,
+                                "parent": parent
+                            }
+                         },
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(JSON.stringify(body));
+                done();
+            });
+        });
+        it("Added Task", () => {
+            expect(data.status).toBe(200);
+        });
+    });
+
+    describe("Try to Add an Existing Task", () => {
+        var data = {};
+        var task = "My First Task";
+        var start_date = new Date();
+        var end_date = new Date();
+        end_date.setDate(end_date.getDate() + 1);
+        var priority = 10;
+        var user = mongoose.Types.ObjectId("5c92894c1c9d4400005e88a2");
+        var project = mongoose.Types.ObjectId("5c9401a01c9d4400001350a2");
+        var parent = mongoose.Types.ObjectId("5c959cf91c9d440000845fc8");
+        beforeAll((done) => {
+            Request.post("http://localhost:9001/task/add", 
+                         {
+                            json: {
+                                "task": task,
+                                "start_date": start_date,
+                                "end_date": end_date,
+                                "priority": priority,
+                                "user": user,
+                                "project": project,
+                                "parent": parent
+                            }
+                         },
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(JSON.stringify(body));
+                done();
+            });
+        });
+        it("Tring to Add existing Task", () => {
             expect(data.status).toBe(400);
         });
     });

@@ -1,0 +1,221 @@
+    ///////////////////////////
+    // Tasks APIs            //
+    ///////////////////////////
+    describe("Get All Task", () => {
+        var data = {};
+        beforeAll((done) => {
+            Request.get("http://localhost:9001/tasks", (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(body);
+                done();
+            });
+        });
+
+        it("Response Status", () => {
+            expect(data.status).toBe(200);
+        });
+        it("Response Message", () => {
+            expect(data.body.length).toBeGreaterThan(0);
+        });
+    });
+
+    describe("Get Existent Task By ID", () => {
+        var data = {};
+        var taskID = "5c959fc61c9d440000845fca";
+        var APIurl = "http://localhost:9001/tasks/" + taskID;
+        beforeAll((done) => {
+            Request.get(APIurl,
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(body);
+                done();
+            });
+        });
+
+        it("Found Tasks", () => {
+            expect(data.status).toBe(200);
+        });
+        it("Response Body", () => {
+            expect(data.body._id).toEqual(taskID);
+        });
+    });
+
+    describe("Add a New Task", () => {
+        var data = {};
+        var task_id = Math.floor(Math.random()* (9000-1000)+1000);
+        var task = "Unit Test Task Name" + task_id;
+        var start_date = new Date();
+        var end_date = new Date();
+        end_date.setDate(end_date.getDate() + 1);
+        var priority = 10;
+        var user = {
+            "$ref": "users",
+            "$id": ObjectId("5c92894c1c9d4400005e88a2"),
+            "$db": "ProjectManager"
+        };
+        var project = {
+            "$ref": "projects",
+            "$id": ObjectId("5c9401a01c9d4400001350a2"),
+            "$db": "ProjectManager"
+        };
+        var parent = {
+            "$ref": "parenttasks",
+            "$id": ObjectId("5c959cf91c9d440000845fc8"),
+            "$db": "ProjectManager"
+        };
+        beforeAll((done) => {
+            Request.post("http://localhost:9001/task/add", 
+                         {
+                            json: {
+                                "task": task,
+                                "start_date": start_date,
+                                "end_date": end_date,
+                                "priority": priority,
+                                "user": user,
+                                "project": project,
+                                "parent": parent
+                            }
+                         },
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(JSON.stringify(body));
+                done();
+            });
+        });
+
+        it("Add Task Request Status", () => {
+            expect(data.status).toBe(200);
+        });
+        it("Add Task Message Body", () => {
+             expect(data.body.Task).toEqual("Added Successfully");
+        });
+    });
+
+    describe("Try to Add an Existing Task", () => {
+        var data = {};
+        var task = "My First Task";
+        var start_date = new Date();
+        var end_date = new Date();
+        end_date.setDate(end_date.getDate() + 1);
+        var priority = 10;
+        var user = "5c92894c1c9d4400005e88a2";
+        var project = "5c9401a01c9d4400001350a2";
+        var parent = "5c959cf91c9d440000845fc8";
+        beforeAll((done) => {
+            Request.post("http://localhost:9001/task/add", 
+                         {
+                            json: {
+                                "task": task,
+                                "start_date": start_date,
+                                "end_date": end_date,
+                                "priority": priority,
+                                "user": user,
+                                "project": project,
+                                "parent": parent
+                            }
+                         },
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(JSON.stringify(body));
+                done();
+            });
+        });
+
+        it("Add Task Request Status", () => {
+            expect(data.status).toBe(400);
+        });
+
+    });
+
+    ///////////////////////////
+    // Parent Tasks APIs     //
+    ///////////////////////////
+    describe("Get All Parent Tasks", () => {
+        var data = {};
+        beforeAll((done) => {
+            Request.get("http://localhost:9001/parenttasks", (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(body);
+                done();
+            });
+        });
+
+        it("Response Status", () => {
+            expect(data.status).toBe(200);
+        });
+        it("Response Message", () => {
+            expect(data.body.length).toBeGreaterThan(0);
+        });
+    });
+
+    describe("Get Existent Parent Task By ID", () => {
+        var data = {};
+        var taskID = "5c959cf91c9d440000845fc8";
+        var APIurl = "http://localhost:9001/parenttasks/" + taskID;
+        beforeAll((done) => {
+            Request.get(APIurl,
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(body);
+                done();
+            });
+        });
+
+        it("Found Tasks", () => {
+            expect(data.status).toBe(200);
+        });
+        it("Response Body", () => {
+            expect(data.body._id).toEqual(taskID);
+        });
+    });    
+
+    describe("Add a New Parent Task", () => {
+        var data = {};
+        var task_id = Math.floor(Math.random()* (9000-1000)+1000);
+        var task = "Unit Test Parent Task" + task_id;
+
+        beforeAll((done) => {
+            Request.post("http://localhost:9001/parenttask/add", 
+                         {
+                            json: {
+                                "parent_task": task
+                            }
+                         },
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(JSON.stringify(body));
+                done();
+            });
+        });
+
+        it("Add Parent Task Request Status", () => {
+            expect(data.status).toBe(200);
+        });
+        it("Add Parent Task Message Body", () => {
+             expect(data.body.Parent).toEqual("Added Successfully");
+        });
+    });
+
+    describe("Try Adding an Existing Parent Task", () => {
+        var data = {};
+        var task = "First Parent Task";
+
+        beforeAll((done) => {
+            Request.post("http://localhost:9001/parenttask/add", 
+                         {
+                            json: {
+                                "parent_task": task
+                            }
+                         },
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(JSON.stringify(body));
+                done();
+            });
+        });
+
+        it("Add Parent Task Request Status", () => {
+            expect(data.status).toBe(400);
+        });
+
+    });

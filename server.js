@@ -218,7 +218,8 @@ router.route('/task/add').post((req, res) => {
         })
         .catch(err => {
             res.status(400).send('Failed to create new User');
-            logger.info({ "message":"Add Failed"});
+            logger.info({ "message":"Add Failed",
+                          "Error Message": err});
         });
 });
 
