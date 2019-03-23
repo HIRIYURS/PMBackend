@@ -513,4 +513,152 @@ describe("Test Project Manager Backend APIs",() => {
 
     });
 
+    describe("Delete an Existing Parent Task", () => {
+        var data = {};
+        var ptaskToDel;
+        var counter = 1;
+        beforeEach((done) => {
+            if (counter == 1) {
+                Request.get("http://localhost:9001/parenttasks", (err, response, body) => {
+                    data.status = response.statusCode;
+                    data.body = JSON.parse(body);
+                    counter++;
+                    done();
+                });
+            } 
+            if (counter == 2) {
+                var APIurl = "http://localhost:9001/parenttask/delete/" + ptaskToDel;
+                Request.get(APIurl, (err, response, body) => {
+                    data.status = response.statusCode;
+                    data.body = JSON.parse(body);
+                    done();
+                });
+            }
+        });
+
+        it("Response Status", (done) => {
+            ptaskToDel = data.body[3]._id;
+            expect(data.status).toBe(200);
+            done();            
+        });
+
+        it("Delete Response Status", (done) => {
+            expect(data.status).toBe(200);
+            done();            
+        });
+    });    
+
+    describe("Delete an Existing Task", () => {
+        var data = {};
+        var taskToDel;
+        var counter = 1;
+        beforeEach((done) => {
+            if (counter == 1) {
+                Request.get("http://localhost:9001/tasks", (err, response, body) => {
+                    data.status = response.statusCode;
+                    data.body = JSON.parse(body);
+                    counter++;
+                    done();
+                });
+            } 
+            if (counter == 2) {
+                var APIurl = "http://localhost:9001/task/delete/" + taskToDel;
+                Request.get(APIurl, (err, response, body) => {
+                    data.status = response.statusCode;
+                    data.body = JSON.parse(body);
+                    done();
+                });
+            }
+        });
+
+        it("Response Status", (done) => {
+            taskToDel = data.body[3]._id;
+            expect(data.status).toBe(200);
+            done();            
+        });
+
+        it("Delete Response Status", (done) => {
+            expect(data.status).toBe(200);
+            done();            
+        });
+    });        
+
+    // describe("Delete an Existing User", () => {
+    //     var data = {};
+    //     var userToDel;
+    //     var counter = 1;
+    //     beforeEach((done) => {
+    //         if (counter == 1) {
+    //             Request.get("http://localhost:9001/users", (err, response, body) => {
+    //                 data.status = response.statusCode;
+    //                 data.body = JSON.parse(body);
+    //                 counter++;
+    //                 done();
+    //             });
+    //         } 
+    //         if (counter == 2) {
+    //             console.log("User to Delete: ", userToDel);
+    //             var APIurl = "http://localhost:9001/user/delete/" + userToDel;
+    //             Request.get(APIurl, (err, response, body) => {
+    //                 data.status = response.statusCode;
+    //                 data.body = JSON.parse(body);
+    //                 done();
+    //             });
+    //         }
+    //     });
+
+    //     it("Response Status", (done) => {
+    //         expect(data.status).toBe(200);
+    //         console.log("data.status: ", data.status);
+    //         if (data.status == 200) {
+    //             userToDel = data.body[3]._id;
+    //         }
+    //         done();            
+    //     });
+
+    //     it("Delete Response Status", (done) => {
+    //         expect(data.status).toBe(200);
+    //         done();            
+    //     });
+    // });            
+
+    describe("Delete an Existing Project", () => {
+        var data = {};
+        var projToDel;
+        var counter = 1;
+        beforeEach((done) => {
+            if (counter == 1) {
+                Request.get("http://localhost:9001/projects", (err, response, body) => {
+                    data.status = response.statusCode;
+                    data.body = JSON.parse(body);
+                    counter++;
+                    done();
+                });
+            } 
+            if (counter == 2) {
+                console.log("Project to Delete: ", projToDel);
+                var APIurl = "http://localhost:9001/user/delete/" + projToDel;
+                Request.get(APIurl, (err, response, body) => {
+                    data.status = response.statusCode;
+                    data.body = JSON.parse(body);
+                    done();
+                });
+            }
+        });
+
+        it("Response Status", (done) => {
+            expect(data.status).toBe(200);
+            console.log("data.status: ", data.status);
+            if (data.status == 200) {
+                projToDel = data.body[3]._id;
+            }
+            done();            
+        });
+
+        it("Delete Response Status", (done) => {
+            expect(data.status).toBe(200);
+            done();            
+        });
+    });    
+
 });
