@@ -351,6 +351,27 @@ describe("Test Project Manager Backend APIs",() => {
         });
     });
 
+    describe("Get Existent Task By Project", () => {
+        var data = {};
+        var projID = "5c96c1b51c9d4400001b5628";
+        var taskID = "5c959fc61c9d440000845fca";
+        var APIurl = "http://localhost:9001/gettasksbyproj/" + projID;
+        beforeEach((done) => {
+            Request.get(APIurl,
+                         (err, response, body) => {
+                data.status = response.statusCode;
+                data.body = JSON.parse(body);
+                done();
+            });
+        });
+
+        it("Found Tasks", (done) => {
+            expect(data.status).toBe(200);
+            expect(data.body[0]._id).toEqual(taskID);
+            done();
+        });
+    });    
+
     describe("Add a New Task", () => {
         var data = {};
         var task_id = Math.floor(Math.random()* (9000-1000)+1000);
@@ -676,10 +697,9 @@ describe("Test Project Manager Backend APIs",() => {
         end_date.setDate(end_date.getDate() + 1);
         var priority = 17;
         var user = mongoose.Types.ObjectId("5c92894c1c9d4400005e88a2");
-        var project = mongoose.Types.ObjectId("5c9401a01c9d4400001350a2");
+        var project = mongoose.Types.ObjectId("5c96c1b51c9d4400001b5628");
         var parent = mongoose.Types.ObjectId("5c959cf91c9d440000845fc8");
 
-        console.log("\n********** APIurl: ", APIurl);
         beforeAll((done) => {
             Request.post(APIurl, 
                          {

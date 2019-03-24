@@ -192,8 +192,10 @@ router.route('/tasks/:id').get((req, res) => {
 });
 
 router.route('/gettasksbyproj/:id').get((req, res) => {
-    logger.info('Request Received to Get Tasks By Project!');
-    projmgr.User.find({ "parent": req.params.id}, (err, tasks) => {
+    logger.info({"Request" :'Request Received to Get Tasks By Project!',
+                "Project ID": req.params.id
+                });
+    projmgr.Task.find({ "project": mongoose.Types.ObjectId(req.params.id)}, (err, tasks) => {
         if (err) {
             logger.info({ "message":"Error Getting the Tasks for Project",
                           "Project ID": req.params.id,
@@ -201,7 +203,8 @@ router.route('/gettasksbyproj/:id').get((req, res) => {
                         });
             res.status(400).json({});
         } else {
-            res.json(tasks);
+            logger.info("Tasks: ", tasks);
+            res.status(200).json(tasks);
         }
     });
 });

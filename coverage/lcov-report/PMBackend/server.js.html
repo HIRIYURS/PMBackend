@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">69.5% </span>
+        <span class="strong">71.64% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>139/200</span>
+        <span class='fraction'>144/201</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">44.44% </span>
+        <span class="strong">47.22% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>16/36</span>
+        <span class='fraction'>17/36</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">69.5% </span>
+        <span class="strong">71.64% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>139/200</span>
+        <span class='fraction'>144/201</span>
       </div>
     </div>
   </div>
@@ -467,7 +467,10 @@
 422
 423
 424
-425</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+425
+426
+427
+428</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -661,16 +664,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -874,9 +880,9 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1085,16 +1091,19 @@ router.route('/tasks/:id').get((req, res) =&gt; {
 });
 &nbsp;
 router.route('/gettasksbyproj/:id').get((req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    logger.info('Request Received to Get Tasks By Project!');</span>
-<span class="cstat-no" title="statement not covered" >    projmgr.User.find({ "parent": req.params.id}, (err, tasks) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+    logger.info({"Request" :'Request Received to Get Tasks By Project!',
+                "Project ID": req.params.id
+                });
+    projmgr.Task.find({ "project": mongoose.Types.ObjectId(req.params.id)}, (err, tasks) =&gt; {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >            logger.info({ "message":"Error Getting the Tasks for Project",</span>
                           "Project ID": req.params.id,
                           "Error": err
                         });
 <span class="cstat-no" title="statement not covered" >            res.status(400).json({});</span>
         } else {
-<span class="cstat-no" title="statement not covered" >            res.json(tasks);</span>
+            logger.info("Tasks: ", tasks);
+            res.status(200).json(tasks);
         }
     });
 });
@@ -1297,10 +1306,10 @@ router.route('/project/update/:id').post((req, res) =&gt; {
 router.route('/project/delete/:id').get((req, res) =&gt; {
     logger.info("Deleting Project: ", req.params.id);
     projmgr.Project.findByIdAndRemove({_id: req.params.id}, (err, project) =&gt; {
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (err) {
-            res.json('Error deleting Project');
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
+<span class="cstat-no" title="statement not covered" >            res.json('Error deleting Project');</span>
         } else {
-<span class="cstat-no" title="statement not covered" >            res.json('Project Removed Successfully');</span>
+            res.json('Project Removed Successfully');
         }
     });
 });
@@ -1321,7 +1330,7 @@ module.exports = server;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Mar 24 2019 04:38:33 GMT+0530 (India Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Mar 24 2019 05:35:05 GMT+0530 (India Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>
