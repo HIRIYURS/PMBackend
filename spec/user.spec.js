@@ -380,6 +380,7 @@ describe("Test Project Manager Backend APIs",() => {
         var end_date = new Date();
         end_date.setDate(end_date.getDate() + 1);
         var priority = 10;
+        var status = false;
         var user = mongoose.Types.ObjectId("5c92894c1c9d4400005e88a2");
         var project = mongoose.Types.ObjectId("5c9401a01c9d4400001350a2");
         var parent = mongoose.Types.ObjectId("5c959cf91c9d440000845fc8");
@@ -391,6 +392,7 @@ describe("Test Project Manager Backend APIs",() => {
                                 "start_date": start_date,
                                 "end_date": end_date,
                                 "priority": priority,
+                                "status": status,
                                 "user": user,
                                 "project": project,
                                 "parent": parent
@@ -414,6 +416,7 @@ describe("Test Project Manager Backend APIs",() => {
         var end_date = new Date();
         end_date.setDate(end_date.getDate() + 1);
         var priority = 10;
+        var status = false;
         var user = mongoose.Types.ObjectId("5c92894c1c9d4400005e88a2");
         var project = mongoose.Types.ObjectId("5c9401a01c9d4400001350a2");
         var parent = mongoose.Types.ObjectId("5c959cf91c9d440000845fc8");
@@ -425,6 +428,7 @@ describe("Test Project Manager Backend APIs",() => {
                                 "start_date": start_date,
                                 "end_date": end_date,
                                 "priority": priority,
+                                "status": status,
                                 "user": user,
                                 "project": project,
                                 "parent": parent
@@ -696,6 +700,7 @@ describe("Test Project Manager Backend APIs",() => {
         var end_date = new Date();
         end_date.setDate(end_date.getDate() + 1);
         var priority = 17;
+        var status = false;
         var user = mongoose.Types.ObjectId("5c92894c1c9d4400005e88a2");
         var project = mongoose.Types.ObjectId("5c96c1b51c9d4400001b5628");
         var parent = mongoose.Types.ObjectId("5c959cf91c9d440000845fc8");
@@ -708,6 +713,7 @@ describe("Test Project Manager Backend APIs",() => {
                                 "start_date": start_date,
                                 "end_date": end_date,
                                 "priority": priority,
+                                "status": status,
                                 "user": user,
                                 "project": project,
                                 "parent": parent
