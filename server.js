@@ -203,7 +203,7 @@ router.route('/gettasksbyproj/:id').get((req, res) => {
                         });
             res.status(400).json({});
         } else {
-            logger.info("Tasks: ", tasks);
+            //logger.info("Tasks: ", tasks);
             res.status(200).json(tasks);
         }
     });
