@@ -341,7 +341,7 @@ router.route('/parenttask/delete/:id').get((req, res) => {
 
 // route or API for Projects
 router.route('/projects').get((req, res) => {
-    logger.info('Request Received to add Project!');
+    logger.info('Request Received to Fetch Project!');
     projmgr.Project.find((err, projects) => {
         if (err) {
             res.status(400).send(err);
