@@ -122,7 +122,7 @@ router.route('/user/add').post((req, res) => {
             logger.info({ "message":"Adding Successfully"});
         })
         .catch(err => {
-            res.status(400).send('Failed to create new User');
+            res.status(400).json({'User':'Failed to create new User'});
             logger.info({ "message":"Add Failed"});
         });
 });
@@ -396,7 +396,7 @@ router.route('/project/update/:id').post((req, res) => {
             project.priority = req.body.priority;
             project.user = req.body.user;
             project.save().then(project => {
-                res.status(200).json('Project Update Done');
+                res.status(200).json({'Project': 'Update Done'});
             }).catch(err => {
                 res.status(400).send('Project Update Failed!');
             });
